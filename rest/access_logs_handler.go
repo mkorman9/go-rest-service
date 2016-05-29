@@ -22,7 +22,5 @@ func AccessLogsHandler(inner http.Handler, name string) http.Handler {
 			name,
 			time.Since(start),
 		)
-		log.Info("info xD")
-		log.Error("error xD")
 	})
 }
