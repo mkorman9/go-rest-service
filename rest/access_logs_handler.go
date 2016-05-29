@@ -16,7 +16,8 @@ func AccessLogsHandler(inner http.Handler, name string) http.Handler {
 		inner.ServeHTTP(w, r)
 
 		log.Debugf(
-			"%s\t%s\t%s\t%s",
+			"%s\t%s\t%s\t%s\t%s",
+			r.RemoteAddr,
 			r.Method,
 			r.RequestURI,
 			name,
