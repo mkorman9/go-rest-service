@@ -16,7 +16,7 @@ type RestConfig struct {
 func ReadConfiguration(path string) RestConfig {
 	file, err := os.Open(path)
 	if err != nil {
-		panic("Cannot open configuratuion file " + path)
+		panic("Cannot open configuration file " + path)
 	}
 
 	decoder := json.NewDecoder(file)
@@ -24,7 +24,7 @@ func ReadConfiguration(path string) RestConfig {
 	err = decoder.Decode(&configuration)
 
 	if err != nil {
-		panic("Cannot parse configuratuion file " + path)
+		panic("Cannot parse configuration file " + path)
 	}
 
 	return configuration
