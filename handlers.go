@@ -2,13 +2,16 @@ package main
 
 import (
 	"net/http"
-	"fmt"
 
 	"github.com/mkorman9/restapi/rest"
+	"github.com/jmoiron/sqlx"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	cats := []Cat{ Cat{"Jack", 9}, Cat{"Daniels", 11} }
+	var cats = []Cat{}
+	db := rest.GetContext().GetMember("db_Default").(*sqlx.DB)
+	db.Select(&cats, "SELECT * FROM CAT")
+
 	rest.RespondJson(w, http.StatusOK, cats)
 }
 
@@ -18,6 +21,4 @@ func Save(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-	fmt.Printf("%s, %d\n", cat.Name, cat.Age)
 }

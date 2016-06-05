@@ -14,6 +14,5 @@ func RespondJson(w http.ResponseWriter, status int, entity interface{}) {
 }
 
 func ReadJson(req *http.Request, entity interface{}) error {
-	decoder := json.NewDecoder(req.Body)
-	return decoder.Decode(entity)
+	return json.NewDecoder(req.Body).Decode(entity)
 }

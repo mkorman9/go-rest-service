@@ -5,6 +5,8 @@ import (
 	"errors"
 
 	"github.com/op/go-logging"
+	"fmt"
+	"os"
 )
 
 func RecoverHandler(h http.Handler) http.Handler {
@@ -25,6 +27,14 @@ func RecoverHandler(h http.Handler) http.Handler {
 				}
 				log.Errorf(
 					"%s\t%s\t%s\tFatal error during request handling: %s",
+					req.RemoteAddr,
+					req.Method,
+					req.RequestURI,
+					err.Error(),
+				)
+				fmt.Fprintf(
+					os.Stderr,
+					"%s\t%s\t%s\tFatal error during request handling: %s\n",
 					req.RemoteAddr,
 					req.Method,
 					req.RequestURI,
