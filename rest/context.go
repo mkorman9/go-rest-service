@@ -2,6 +2,7 @@ package rest
 
 import (
 	"sync"
+	"strings"
 )
 
 var RestConfig = "restConfig"
@@ -15,6 +16,17 @@ type AppContext struct {
 
 func (context *AppContext) GetMember(name string) interface{} {
 	return context.members[name]
+}
+
+func (context *AppContext) GetDatasourcesList() []string {
+	datasources := make([]string, 0)
+	for key, _ := range context.members {
+		if strings.HasPrefix(key, "db_") {
+			datasources = append(datasources, key)
+		}
+	}
+
+	return datasources
 }
 
 func (context *AppContext) AddMember(name string, value interface{}) {
