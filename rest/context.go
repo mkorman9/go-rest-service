@@ -19,7 +19,7 @@ func (context *AppContext) GetMember(name string) interface{} {
 }
 
 func (context *AppContext) GetDatasourcesList() []string {
-	datasources := make([]string, 0)
+	datasources := []string{}
 	for key, _ := range context.members {
 		if strings.HasPrefix(key, "db_") {
 			datasources = append(datasources, key)
