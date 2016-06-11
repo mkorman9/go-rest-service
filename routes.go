@@ -4,7 +4,7 @@ import (
 	"github.com/mkorman9/restapi/rest"
 )
 
-var routes = []rest.Route{
+var AppRoutes = []rest.Route{
 	rest.Route{
 		"Index",
 		"GET",
