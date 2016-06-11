@@ -8,21 +8,23 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	var cats = []Cat{}
 	db := rest.GetContext().GetMember("db_Default").(*sqlx.DB)
+
+	var cats = []Cat{}
 	db.Select(&cats, "SELECT * FROM CAT")
 
 	rest.RespondJson(w, http.StatusOK, cats)
 }
 
 func Save(w http.ResponseWriter, r *http.Request) {
+	db := rest.GetContext().GetMember("db_Default").(*sqlx.DB)
+
 	var cat Cat
 	if err := rest.ReadJson(r, &cat); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	db := rest.GetContext().GetMember("db_Default").(*sqlx.DB)
 	tx := db.MustBegin()
 	tx.NamedExec("INSERT INTO CAT (ROLE_NAME, NAME, DUELS_WON) VALUES (:ROLE_NAME, :NAME, :DUELS_WON)", &cat)
 	tx.Commit()

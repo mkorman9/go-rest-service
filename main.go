@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"net/http"
 	"log"
 
@@ -9,12 +8,9 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
-	if len(args) < 1 {
-		panic("Application requires passing configuration file path as argument")
-	}
+	configFileLocation := "rest_config.json"
 
-	config := rest.ReadConfiguration(args[0])
+	config := rest.ReadConfiguration(configFileLocation)
 	context := rest.RestAppContext(routes, config)
 	log.Fatal(http.ListenAndServe(config.Host, context))
 }
