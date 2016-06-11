@@ -7,9 +7,6 @@ import (
 	"github.com/op/go-logging"
 	"github.com/natefinch/lumberjack"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jmoiron/sqlx"
-	"fmt"
-	"time"
 )
 
 type Route struct {
